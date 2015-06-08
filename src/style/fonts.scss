@@ -1,0 +1,22 @@
+//PT Serif Caption
+//Normal 400, Normal 400 Italic
+//
+//PT Mono
+//Normal 400
+@import url(http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic|PT+Mono&subset=latin,cyrillic);
+
+
+//Helvetica Regular
+@font-face {
+  font-family: 'Helvetica Regular';
+  src: url('/fonts/helveticaregular-webfont.eot');
+  src: url('/fonts/helveticaregular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/helveticaregular-webfont.woff2') format('woff2'),
+  url('/fonts/helveticaregular-webfont.woff') format('woff'),
+  url('/fonts/helveticaregular-webfont.ttf') format('truetype'),
+  url('/fonts/helveticaregular-webfont.svg#helveticaneuecyrroman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-basic: "Helvetica Regular", Helvetica, Arial, sans-serif;
