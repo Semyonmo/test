@@ -1,0 +1,207 @@
+.article {
+  &__container {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 182px;
+    @media  (max-width: $screen-md-max) {
+      padding-bottom: 60px;
+    }
+    @media (min-width: 1200px) {
+      width: 1028px;
+    }
+  }
+  &__header {
+    padding-top: 64px;
+    &-stripes {
+      position: relative;
+      left: -77px;
+      width: 130px;
+      cursor: pointer;
+      > .strip {
+        transition: all 0.2s ease 0s;
+        display: block;
+        height: 12px;
+        background-color: black;
+        margin-bottom: 8px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &--white {
+          background-color: white;
+        }
+        @media  (max-width: $screen-sm-max) {
+          height: 4px;
+          margin-bottom: 6px;
+        }
+      }
+      @media  (max-width: $screen-sm-max) {
+        left: 0;
+        width: 43px;
+        padding-bottom: 10px;
+      }
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        left: 0;
+      }
+    }
+    &-strip {
+      display: block;
+      height: 12px;
+      background-color: black;
+      margin-bottom: 8px;
+      width: 130px;
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        display: none;
+      }
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding-top: 10px;
+    }
+  }
+  &__title {
+    &-text {
+      margin-top: -12px;
+      font-family: $font-basic;
+      font-size: 80px;
+      font-weight: bold;
+      line-height: 1.19;
+      letter-spacing: 3px;
+      color: black;
+      @media (max-width: $screen-xs-max) {
+        font-size: 26px;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        font-size: 55px;
+        text-align: center;
+      }
+    }
+    &-signature {
+      text-align: center;
+      margin-top: 103px;
+      &-fio {
+        letter-spacing: 3px;
+        font-family: $font-basic;
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: black;
+      }
+      &-description {
+        font-family: $font-third;
+        font-style: italic;
+        font-size: 13px;
+        color: black;
+      }
+      @media (max-width: $screen-sm-max) {
+        margin-top: 50px;
+      }
+    }
+    &-wrapper {
+      background-color: white;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 315px;
+      @media (max-width: $screen-xs-max) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+      }
+      @media (min-width: $screen-lg-min) {
+
+      }
+    }
+
+  }
+
+  &__number {
+    font-family: $font-basic;
+    font-weight: bold;
+    font-size: 80px;
+    position: relative;
+    color: white;
+    display: inline-block;
+    transform: scale(3.9);
+    top: 35px;
+    left: 130px;
+    letter-spacing: 5px;
+    &-wrapper {
+      height: 210px;
+      margin-bottom: 50px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      @media (max-width: $screen-sm-max) {
+        display: none;
+      }
+    }
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
+  }
+
+  &__text {
+    margin-top: 35px;
+    p {
+      font-family: $font-second;
+      font-size: 24px;
+      line-height: 1.54;
+      color: white;
+      @media (max-width: $screen-xs-max) {
+        font-size: 18px;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        font-size: 22px;
+      }
+    }
+    margin-bottom: 20px;
+  }
+
+  &__photo {
+    &-wrapper {
+      margin-top: 25px;
+      background-color: white;
+      padding: 10px 10px 55px 10px;
+      margin-bottom: 20px;
+      @media  (max-width: $screen-sm-max) {
+        padding-bottom: 20px;
+      }
+    }
+    &-img {
+      height: 400px;
+      background-size: cover;
+      background-position: center center;
+      background-image: url('');
+
+      &-wrapper {
+        margin: 0 0 10px 0;
+        overflow: hidden;
+
+      }
+    }
+    &-title {
+      letter-spacing: 3px;
+      font-family: $font-basic;
+      font-size: 14px;
+      padding-left: 10px;
+      color: black;
+    }
+    &-description {
+      font-family: $font-third;
+      font-style: italic;
+      font-size: 13px;
+      padding-left: 10px;
+      max-width: 350px;
+      color: black;
+    }
+  }
+}

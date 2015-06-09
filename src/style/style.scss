@@ -1,2 +1,12 @@
+@import "variables";
 @import "fonts";
-@import "libs";
+
+//libs
+@import "libs/bootstrap";
+
+//blocks
+@import "block/body";
+@import "block/article";
+@import "block/background";
+@import "block/footer";
+

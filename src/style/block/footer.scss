@@ -1,0 +1,104 @@
+.footer {
+  &__scroll {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: 5;
+    transition: transform 0.6s ease 0s;
+    transform: matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,0,490,0,1);
+    @media (max-width: $screen-sm-max) {
+      display: none !important;
+    }
+    &.active {
+      transform: matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,0,0,0,1);
+    }
+  }
+  &__container {
+    @media (min-width: 1200px) {
+      width: 1028px;
+    }
+  }
+  &__title {
+    left: -77px;
+    position: relative;
+    margin-right: -77px;
+    padding: 35px 0;
+    margin-bottom: 170px;
+    &-text {
+      text-transform: uppercase;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-family: $font-basic;
+      margin-bottom: 2px;
+    }
+    &-description {
+      color: white;
+      font-size: 13px;
+      font-family: $font-third;
+      font-style: italic;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 30px;
+    }
+    @media (max-width: $screen-md-max) {
+      left: 0;
+      margin-right: 0;
+    }
+  }
+  &__description {
+    left: -77px;
+    position: relative;
+    margin-bottom: 70px;
+    p {
+      font-family: $font-second;
+      font-size: 24px;
+      color: white;
+      line-height: 1.57;
+      margin-bottom: 23px;
+      @media (max-width: $screen-sm-max) {
+        font-size: 16px;
+      }
+    }
+    &-link {
+      color: white;
+      text-decoration: underline;
+      &:hover, &:active {
+        text-decoration: none;
+        color: white;
+      }
+      &:focus {
+        color: white;
+      }
+    }
+    @media (max-width: $screen-md-max) {
+      left: 0;
+      margin-bottom: 20px;
+    }
+  }
+  &__anchor {
+    text-transform: uppercase;
+    color: white;
+    padding: 45px 0;
+    width: 100%;
+    letter-spacing: 53px;
+    text-align: right;
+    font-family: $font-basic;
+    cursor: pointer;
+    span {
+      margin-right: -50px;
+    }
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      letter-spacing: 20px;
+    }
+  }
+  &__place {
+    background-color: black;
+    position: relative;
+    z-index: 3;
+  }
+}

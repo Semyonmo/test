@@ -18,7 +18,7 @@ gulp.task('style', ['images'], function () {
         .merge(stream.scss, stream.less)
         .pipe(concat('style.css'))
         .pipe(autoprefixer({browsers: ['last 2 version']}))
-        //.pipe(csso())
+        .pipe(csso())
         .pipe(gulp.dest(config.dest))
         .pipe(browserSync.reload({stream: true}));
 });
