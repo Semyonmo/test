@@ -46,166 +46,18 @@
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	var _modulesBackgroundJs = __webpack_require__(4);
 
-	var _jquery = __webpack_require__(1);
+	var _modulesBackgroundJs2 = _interopRequireDefault(_modulesBackgroundJs);
 
-	var _jquery2 = _interopRequireDefault(_jquery);
+	var _modulesFooterJs = __webpack_require__(5);
 
-	var _lodash = __webpack_require__(2);
+	var _modulesFooterJs2 = _interopRequireDefault(_modulesFooterJs);
 
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	var magicBg = (function () {
-	    function magicBg(selector, imgUrl, height, width) {
-	        _classCallCheck(this, magicBg);
-
-	        var self = this;
-
-	        self.element = (0, _jquery2['default'])(selector);
-	        self.viewport = this.getViewport();
-
-	        if (imgUrl != null) {
-	            //if bg with image
-	            self.image = new Image();
-
-	            self.image.onload = function () {
-	                var image = this;
-
-	                self.updateImage(image.height, image.width);
-
-	                //mobile check
-	                if (typeof window.orientation !== 'undefined') {
-	                    self.element.css('position', 'fixed').css('top', 0);
-	                } else {
-	                    (0, _jquery2['default'])(window).scroll(function () {
-	                        self.scroll(self);
-	                    });
-
-	                    (0, _jquery2['default'])(window).resize(_lodash2['default'].throttle(function () {
-	                        self.updateImage(image.height, image.width);
-	                    }, 100));
-	                }
-	            };
-
-	            self.image.src = imgUrl;
-	        }
-	    }
-
-	    _createClass(magicBg, [{
-	        key: 'updateImage',
-	        value: function updateImage(height, width) {
-	            console.log('update');
-	            var self = this;
-	            self.viewport = self.getViewport();
-	            self.ratioImage = width / height;
-	            self.ratioScreen = self.viewport.width / self.viewport.height;
-
-	            if (self.ratioImage < self.ratioScreen) {
-	                //image can be scrolled
-	                console.log('can be scrolled');
-	                self.curentScale = self.ratioScreen / self.ratioImage * 100;
-	            }
-	            self.height = height / 100 * self.curentScale;
-	            self.element.css('backgroundImage', 'url("' + self.image.src + '")');
-
-	            if (self.height > height) {
-	                self.element.css('height', self.height / 10 + 'vh');
-	            }
-	        }
-	    }, {
-	        key: 'scroll',
-	        value: function scroll(self) {
-	            if (self.ratioImage < self.ratioScreen) {
-	                //image can be scrolled
-	                console.log('scroll');
-
-	                var scrollTop = (0, _jquery2['default'])(document).scrollTop();
-	                var overHeight = self.viewport.height * ((self.curentScale - 100) / 100);
-	                console.log(self.curentScale - 100);
-
-	                if (overHeight < scrollTop) {
-	                    //fix image position
-	                    self.element.css('position', 'fixed').css('top', -overHeight);
-	                } else {
-	                    //scroll image with page
-	                    self.element.css('position', 'absolute').css('top', 0);
-	                }
-	            } else {
-	                self.element.css('position', 'fixed').css('top', 0);
-	            }
-	        }
-	    }, {
-	        key: 'getViewport',
-
-	        /**
-	         * Get viewport of browser
-	         * @returns {{width: *, height: *}}
-	         */
-	        value: function getViewport() {
-	            var viewPortWidth;
-	            var viewPortHeight;
-
-	            if (typeof window.innerWidth != 'undefined') {
-	                viewPortWidth = window.innerWidth;
-	                viewPortHeight = window.innerHeight;
-	            } else if (typeof document.documentElement != 'undefined' && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) {
-	                viewPortWidth = document.documentElement.clientWidth;
-	                viewPortHeight = document.documentElement.clientHeight;
-	            }
-
-	            // older versions of IE
-	            else {
-	                viewPortWidth = document.getElementsByTagName('body')[0].clientWidth;
-	                viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
-	            }
-	            return {
-	                width: viewPortWidth,
-	                height: viewPortHeight
-	            };
-	        }
-	    }]);
-
-	    return magicBg;
-	})();
-
-	var bg = new magicBg('#background', '/img/bg.jpg');
-
-	(0, _jquery2['default'])(document).scroll(function () {
-	    applyFooterAction();
-	});
-
-	(0, _jquery2['default'])('.footer__anchor').click(function () {
-	    var $footerScroll = (0, _jquery2['default'])('.footer__scroll');
-	    var $text = (0, _jquery2['default'])('span', this);
-	    if ($footerScroll.hasClass('active')) {
-	        $text.text('КЛИКНИ ЗДЕСь');
-	        $footerScroll.removeClass('active');
-	    } else {
-	        $text.text('закрой');
-	        $footerScroll.addClass('active');
-	    }
-	    applyFooterAction();
-	});
-
-	function isFooterPlaced() {
-	    var scrollBotoom = (0, _jquery2['default'])(document).height() - (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])(window).scrollTop();
-	    var footerHeight = (0, _jquery2['default'])('.footer__scroll').height();
-	    var footerPlace = (0, _jquery2['default'])('.footer__place').height();
-	    return scrollBotoom + footerHeight - 490 < footerPlace;
-	}
-
-	function applyFooterAction() {
-	    if (isFooterPlaced() && !(0, _jquery2['default'])('.footer__scroll').hasClass('active')) {
-	        (0, _jquery2['default'])('.footer__scroll').css('display', 'none');
-	    } else {
-	        (0, _jquery2['default'])('.footer__scroll').css('display', 'block');
-	    }
-	}
+	var bg = new _modulesBackgroundJs2['default']('#background', '/img/bg.jpg');
+	var footer = new _modulesFooterJs2['default']();
 
 /***/ },
 /* 1 */
@@ -21680,6 +21532,242 @@
 		return module;
 	}
 
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _lodash = __webpack_require__(2);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var self = null;
+
+	var Background = (function () {
+	    function Background(selector, imgUrl) {
+	        _classCallCheck(this, Background);
+
+	        self = this;
+
+	        self.element = (0, _jquery2['default'])(selector);
+	        self.viewport = self.getViewport();
+
+	        if (imgUrl != null) {
+	            //if bg with image
+	            self.image = new Image();
+
+	            self.image.onload = function () {
+	                var image = this;
+
+	                self.updateImage(image.height, image.width);
+
+	                if (typeof window.orientation === 'undefined') {
+	                    //desktop
+	                    (0, _jquery2['default'])(window).scroll(function () {
+	                        self.scroll(self);
+	                    });
+
+	                    (0, _jquery2['default'])(window).resize(_lodash2['default'].throttle(function () {
+	                        self.updateImage(image.height, image.width);
+	                    }, 100));
+	                } else {
+	                    //mobile
+	                    self.element.css('position', 'fixed').css('top', 0);
+	                }
+	            };
+
+	            self.image.src = imgUrl;
+	        }
+	    }
+
+	    _createClass(Background, [{
+	        key: 'updateImage',
+
+	        /**
+	         * Update image and viewport of screen and apply new values
+	         * @param height
+	         * @param width
+	         */
+	        value: function updateImage(height, width) {
+	            var self = this;
+	            self.viewport = self.getViewport();
+	            self.ratioImage = width / height;
+	            self.ratioScreen = self.viewport.width / self.viewport.height;
+
+	            if (self.ratioImage < self.ratioScreen) {
+	                //image can be scrolled
+	                self.curentScale = self.ratioScreen / self.ratioImage * 100;
+	            }
+	            self.height = height / 100 * self.curentScale;
+	            self.element.css('backgroundImage', 'url("' + self.image.src + '")');
+
+	            if (self.height > height) {
+	                self.element.css('height', self.height / 10 + 'vh');
+	            }
+	        }
+	    }, {
+	        key: 'scroll',
+
+	        /**
+	         * Scroll background image
+	         * @param self
+	         */
+	        value: function scroll(self) {
+	            if (self.ratioImage < self.ratioScreen) {
+	                //image can be scrolled
+
+	                var scrollTop = (0, _jquery2['default'])(document).scrollTop();
+	                var overHeight = self.viewport.height * ((self.curentScale - 100) / 100);
+
+	                if (overHeight < scrollTop) {
+	                    //fix image position
+	                    self.element.css('position', 'fixed').css('top', -overHeight);
+	                } else {
+	                    //scroll image with page
+	                    self.element.css('position', 'absolute').css('top', 0);
+	                }
+	            } else {
+	                self.element.css('position', 'fixed').css('top', 0);
+	            }
+	        }
+	    }, {
+	        key: 'getViewport',
+
+	        /**
+	         * Get viewport of browser
+	         * @returns {{width: *, height: *}}
+	         */
+	        value: function getViewport() {
+	            var viewPortWidth;
+	            var viewPortHeight;
+
+	            if (typeof window.innerWidth != 'undefined') {
+	                viewPortWidth = window.innerWidth;
+	                viewPortHeight = window.innerHeight;
+	            } else if (typeof document.documentElement != 'undefined' && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) {
+	                viewPortWidth = document.documentElement.clientWidth;
+	                viewPortHeight = document.documentElement.clientHeight;
+	            }
+
+	            // older versions of IE
+	            else {
+	                viewPortWidth = document.getElementsByTagName('body')[0].clientWidth;
+	                viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
+	            }
+	            return {
+	                width: viewPortWidth,
+	                height: viewPortHeight
+	            };
+	        }
+	    }]);
+
+	    return Background;
+	})();
+
+	exports['default'] = Background;
+	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var self = null;
+
+	var Footer = (function () {
+	    function Footer() {
+	        _classCallCheck(this, Footer);
+
+	        self = this;
+	        self.$scrollBar = (0, _jquery2['default'])('.footer__scroll');
+	        self.$scrollBarText = (0, _jquery2['default'])('span', self.$scrollBar);
+	        self.$footer = (0, _jquery2['default'])('.footer__place');
+	        self.$barButton = (0, _jquery2['default'])('.footer__anchor');
+
+	        (0, _jquery2['default'])(document).scroll(self.replace);
+	        self.$barButton.click(self.barClick);
+	    }
+
+	    _createClass(Footer, [{
+	        key: 'barClick',
+	        value: function barClick() {
+	            if (self.$scrollBar.hasClass('active')) {
+	                self.$scrollBarText.text('кликни здесь');
+	                self.$scrollBar.removeClass('active');
+	            } else {
+	                self.$scrollBarText.text('закрой');
+	                self.$scrollBar.addClass('active');
+	            }
+	            self.replace();
+	        }
+	    }, {
+	        key: 'barPosition',
+
+	        /**
+	         * Check footer scroll bar position under footer block
+	         * @returns {boolean}
+	         */
+	        value: function barPosition() {
+	            var scrollBottom = (0, _jquery2['default'])(document).height() - (0, _jquery2['default'])(window).height() - (0, _jquery2['default'])(window).scrollTop(),
+	                scrollBarHeight = self.$scrollBar.height(),
+	                footerHeight = self.$footer.height();
+
+	            return scrollBottom + scrollBarHeight - 490 < footerHeight;
+	            //490 - scroll bar transform value
+	        }
+	    }, {
+	        key: 'replace',
+
+	        /**
+	         * Make footer scroll bar hidden if
+	         * scrolled to footer at bottom
+	         * and footer scroll bar has not been active
+	         */
+	        value: function replace() {
+	            if (self.barPosition() && !self.$scrollBar.hasClass('active')) {
+	                self.$scrollBar.css('display', 'none');
+	            } else {
+	                self.$scrollBar.css('display', 'block');
+	            }
+	        }
+	    }]);
+
+	    return Footer;
+	})();
+
+	exports['default'] = Footer;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
